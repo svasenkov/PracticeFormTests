@@ -23,7 +23,7 @@ public class RegistrationPage {
     private final SelenideElement stateSelect = $("[id=react-select-3-input]");
     private final SelenideElement citySelect = $("[id=react-select-4-input]");
     private final SelenideElement subjectsInput = $("[id=subjectsInput]");
-    private final SelenideElement hobbiesInput = $("[id=hobbiesWrapper");
+    private final SelenideElement hobbiesInput = $("[id=hobbiesWrapper]");
     private final SelenideElement pictureResource = $("[id=uploadPicture]");
     private final SelenideElement userAddress = $("[id=currentAddress]");
     private final SelenideElement submitButton = $("[id=submit]");
@@ -66,7 +66,7 @@ public class RegistrationPage {
 
     @Step("Select date of birth")
     public RegistrationPage setDateOfBirth(String day, String month, String year) {
-        $(dateOfBirthInput).click();
+        dateOfBirthInput.click();
         calendar.setDateOfBirth(day, month, year);
         return this;
     }
@@ -128,7 +128,7 @@ public class RegistrationPage {
     @Step("Check email field condition")
     public RegistrationPage checkErrorEmailCondition(String value) {
         SelenideElement emailCondition = $("[id=" + value + "]");
-        emailCondition.shouldHave(cssValue("border-color", "rgb(25, 135, 84)"));
+        emailCondition.shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
         return this;
     }
 

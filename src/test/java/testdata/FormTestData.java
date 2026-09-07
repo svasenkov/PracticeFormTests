@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -13,14 +14,14 @@ public class FormTestData {
 
     public String firstName = faker.name().firstName();
     public String lastName = faker.name().lastName();
-    public String invalidUserEmail = faker.internet().safeEmailAddress();
+    public String invalidUserEmail = faker.lorem().word();
     public String correctUserEmail = faker.internet().emailAddress();
     public String[] genders = {"Male", "Female", "Other"};
-    public String gender= setRandomGender();
+    public String gender = setRandomGender();
     public String userNumber = faker.phoneNumber().subscriberNumber(10);
-    public String day = generateDayOfBirth();
-    public String month = generateMonth();
-    public String year = generateYear();
+    public String day;
+    public String month;
+    public String year;
     public String currentAddress = faker.address().fullAddress();
     public String[] subjects = {"Physics",
                                 "Chemistry",
@@ -42,34 +43,25 @@ public class FormTestData {
     public String state;
     public String city;
 
+    public FormTestData() {
+        Date birthDate = faker.date().birthday();
+        day = new SimpleDateFormat("dd").format(birthDate);
+        month = new SimpleDateFormat("MMMM", Locale.ENGLISH).format(birthDate);
+        year = new SimpleDateFormat("yyyy").format(birthDate);
+    }
+
     public String setRandomGender() {
         int index = random.nextInt(genders.length);
         return genders[index];
     }
 
-    public String generateMonth() {
-        return faker.options().option("January", "February", "March", "April",
-                                        "May", "June", "July", "August",
-                                        "September", "October", "November", "December");
-    }
-
-    public String generateYear() {
-        Date birthDate = faker.date().birthday();
-        return new SimpleDateFormat("yyyy").format(birthDate);
-    }
-
-    public String generateDayOfBirth() {
-        Date birthDate = faker.date().birthday();
-        return new SimpleDateFormat("dd").format(birthDate);
-    }
-
     public String setRandomSubject() {
-        int index = random.nextInt(genders.length);
+        int index = random.nextInt(subjects.length);
         return subjects[index];
     }
 
     public String setRandomHobbies() {
-        int index = random.nextInt(genders.length);
+        int index = random.nextInt(hobbies.length);
         return hobbies[index];
     }
 
