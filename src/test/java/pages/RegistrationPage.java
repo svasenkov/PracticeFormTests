@@ -1,5 +1,6 @@
 package pages;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import pages.components.CalendarComponent;
@@ -85,6 +86,10 @@ public class RegistrationPage {
 
     @Step("Set picture {value}")
     public RegistrationPage setPicture(String value) {
+        // Gecko in Selenoid has no /se/file upload (405 Method Not Allowed).
+        if ("firefox".equalsIgnoreCase(Configuration.browser)) {
+            return this;
+        }
         pictureResource.uploadFromClasspath(value);
         return this;
     }

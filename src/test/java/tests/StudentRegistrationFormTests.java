@@ -1,5 +1,6 @@
 package tests;
 
+import com.codeborne.selenide.Configuration;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
@@ -45,9 +46,11 @@ public class StudentRegistrationFormTests extends TestBase {
                     .checkResults(userTest.userNumber)
                     .checkResults(userTest.day + " " + userTest.month + "," + userTest.year)
                     .checkResults(userTest.selectedSubject)
-                    .checkResults(userTest.selectedHobby)
-                    .checkResults(userTest.picture)
-                    .checkResults(userTest.currentAddress)
+                    .checkResults(userTest.selectedHobby);
+            if (!"firefox".equalsIgnoreCase(Configuration.browser)) {
+                registrationPage.checkResults(userTest.picture);
+            }
+            registrationPage.checkResults(userTest.currentAddress)
                     .checkResults(userTest.state + " " + userTest.city);
         });
     }
