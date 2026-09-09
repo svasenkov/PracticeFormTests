@@ -43,7 +43,7 @@ public class TestBase {
             capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
         } else if (Configuration.browser.equals("firefox")) {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
-            firefoxOptions.addArguments(List.of("--disable-dev-shm-usage", "--no-sandbox"));
+            firefoxOptions.setCapability("webSocketUrl", false);
             capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, firefoxOptions);
         } else {
             EdgeOptions edgeOptions = new EdgeOptions();

@@ -1,5 +1,6 @@
 package helpers;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
@@ -30,6 +31,9 @@ public class Attach {
     }
 
     public static void browserConsoleLogs() {
+        if ("firefox".equalsIgnoreCase(Configuration.browser)) {
+            return;
+        }
         attachAsText(
                 "Browser console logs",
                 String.join("\n", Selenide.getWebDriverLogs(BROWSER))
